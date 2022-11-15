@@ -1,0 +1,8 @@
+./checkout/node_modules
+./checkout/.env
+./customer/node_modules
+./customer/.env
+./products/node_modules
+./products/.env
+./shopping/node_modules
+./shopping/.env
