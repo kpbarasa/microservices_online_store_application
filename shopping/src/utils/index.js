@@ -71,7 +71,7 @@ module.exports.CreateChannel = async () => {
 //  S2 PUBLISCH MESSAGE
 module.exports.PublishMessage = (channel, bind_key, msg) => {
         channel.publish(EXCHANGE_NAME, bind_key, Buffer.from(msg));
-        console.log("Sent from Product-Service: ", msg);
+        console.log("Sent from Shopping-Service: ", msg);
 };
 
 //  S3 SUBSCRIBE MESSAGE
@@ -82,7 +82,7 @@ module.exports.SubscribeMessageChannel = async (channel, service,) => {
         channel.bindQueue(appQueue.queue, EXCHANGE_NAME, SHOPPING_BINDIG_KEY)
 
         channel.consume(appQueue.queque, data => {
-                console.log('Shopping-Srvice Recieved Data')
+                console.log('Shopping-Service Recieved Data')
                 console.log(data.content.toString())
                 service.SubscribeEvents(data.content.toString())
                 channel.ack(data)

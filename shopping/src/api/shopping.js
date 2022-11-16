@@ -1,6 +1,5 @@
-const { CUSTOMER_BINDIG_KEY } = require("../config");
+const { CUSTOMER_BINDIG_KEY, CHECKOUT_BINDIG_KEY } = require("../config");
 const ShoppingService = require("../services/shopping-service");
-const ProductService = require('../../../products/src/services/product-service');
 const { SubscribeMessageChannel, PublishMessage } = require("../utils");
 const UserAuth = require('./middlewares/auth');
 
@@ -13,7 +12,6 @@ module.exports = (app, channel) => {
 
         const { _id } = req.user;
         const { txnNumber } = req.body;
-
 
         try {
             const { data } = await service.PlaceOrder({ _id, txnNumber });
@@ -73,5 +71,26 @@ module.exports = (app, channel) => {
         // console.log(data);
 
         return res.status(200).json(data);
+    });
+    
+    app.post('/checkout', UserAuth, async (req, res, next) => {
+
+        const { _id } = req.user;
+        const { txnNumber, orderId, paymentType } = req.body;
+        
+
+        try {
+
+            const payload = await service.GetCheckoutPayload(_id, orderId, paymentType, 'CHECKOUT');
+
+            // PublishCustomerEvent(payload)
+            PublishMessage(channel, CHECKOUT_BINDIG_KEY, JSON.stringify(payload))
+
+            // return res.status(200).json(data);
+
+        } catch (err) {
+            next(err)
+        }
+
     });
 }

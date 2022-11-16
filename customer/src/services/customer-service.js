@@ -150,6 +150,8 @@ class CustomerService {
 
         switch (event) {
             case 'ADD_TO_WISHLIST':
+                this.AddToWishlist(userId, product)
+                break;
             case 'REMOVE_FROM_WISHLIST':
                 this.AddToWishlist(userId, product)
                 break;
@@ -168,6 +170,27 @@ class CustomerService {
 
     }
 
+    async GetCheckoutPayload(userId, orderId, paymentType, event) {
+
+        if (orderId && paymentType) {
+
+            const payloadCheckout = {
+
+                event: event,
+                data: { userId, orderId, paymentType, }
+
+            };
+
+            return payloadCheckout
+
+        } else {
+
+            return FormateData({ error: 'Unable to checkout' });
+
+        }
+
+    }
+    
 }
 
 module.exports = CustomerService;

@@ -49,15 +49,32 @@ class checkoutService {
 
     async SuccessCheckout(){
         
-        if(!test){
-            const data = await this.repositoryPayment.StripeSuccess();
-            return FormateData(data);
-        }
-        
-        // else if(){
-        //     const data = await this.repositoryPayment.mpesaCallBack();
+        // if(!test){
+        //     const data = await this.repositoryPayment.StripeSuccess();
         //     return FormateData(data);
         // }
+        
+        // // else if(){
+        // //     const data = await this.repositoryPayment.mpesaCallBack();
+        // //     return FormateData(data);
+        // // }
+
+    }
+    
+    async SubscribeEvents(payload) {
+
+        payload = JSON.parse(payload);
+
+        const item = payload.data.data.product
+        const { data } = payload;
+
+        switch (data.event) {
+            case 'CHECKOUT':
+                this.CheckOut(customerId, orderId, paymentType);
+                break;
+            default:
+                break;
+        }
 
     }
 

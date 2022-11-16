@@ -7,6 +7,10 @@ class SalesRepository {
     async Checkout(customerId, order_id) {
 
         try {
+            const saleExixts = await SalesModel.findOne({ order_id });
+
+            if(saleExixts) return { Warning:"Message: Order is already being processed !"}
+
             // Get order 
             const orders = await OrdersModel.findOne({ order_id });
 
@@ -52,6 +56,8 @@ class SalesRepository {
             }
 
         } catch (error) {
+            
+            throw APIError('API Error', STATUS_CODES.INTERNAL_ERROR, 'Unable to process checkout')
 
         }
     }

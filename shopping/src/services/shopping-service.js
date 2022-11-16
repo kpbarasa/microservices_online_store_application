@@ -20,7 +20,7 @@ class ShoppingService {
 
         const { _id, txnNumber } = userInput;
 
-        const orderResult = await this.repository.CreateNewOrder(_id, txnNumber); 
+        const orderResult = await this.repository.CreateNewOrder(_id, txnNumber);
 
         return FormateData(orderResult);
 
@@ -31,12 +31,12 @@ class ShoppingService {
         return FormateData(orders)
     }
 
-    async GetOrderDetails( customerId ) {
+    async GetOrderDetails(customerId) {
         const orders = await this.repository.Orders(customerId);
         return FormateData(orders)
     }
 
-    async ManageCart(customerId, item, qty, isRemove) { 
+    async ManageCart(customerId, item, qty, isRemove) {
         console.log(item);
 
         const cartResult = await this.repository.AddCartItem(customerId, item, qty, isRemove);
@@ -59,6 +59,27 @@ class ShoppingService {
                 break;
             default:
                 break;
+        }
+
+    }
+
+    async GetCheckoutPayload(userId, orderId, paymentType, event) {
+
+        if (orderId && paymentType) {
+
+            const payloadCheckout = {
+
+                event: event,
+                data: { userId, orderId, paymentType, }
+
+            };
+
+            return payloadCheckout
+
+        } else {
+
+            return FormateData({ error: 'Unable to checkout' });
+
         }
 
     }

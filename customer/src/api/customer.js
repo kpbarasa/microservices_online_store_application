@@ -67,7 +67,6 @@ module.exports = (app, channel) => {
         }
     });
      
-
     app.get('/shoping-details', UserAuth, async (req,res,next) => {
         
         try {
@@ -101,5 +100,26 @@ module.exports = (app, channel) => {
         } catch (err) {
             next(err)
         }
+    });
+
+    app.post('/checkout', UserAuth, async (req, res, next) => {
+
+        const { _id } = req.user;
+        const { txnNumber, orderId, paymentType } = req.body;
+        
+
+        try {
+
+            const payload = await service.GetCheckoutPayload(_id, orderId, paymentType, 'CHECKOUT');
+
+            // PublishCustomerEvent(payload)
+            PublishMessage(channel, CHECKOUT_BINDIG_KEY, JSON.stringify(payload))
+
+            // return res.status(200).json(data);
+
+        } catch (err) {
+            next(err)
+        }
+
     });
 }
