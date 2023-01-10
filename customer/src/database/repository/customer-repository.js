@@ -1,6 +1,4 @@
 const { CustomerModel, AddressModel } = require('../models');
-const { APIError, BadRequestError, STATUS_CODES } = require('../../utils/app-errors');
-const { FormateData } = require('../../utils');
 
 //Dealing with data base operations
 class CustomerRepository {
@@ -29,14 +27,11 @@ class CustomerRepository {
           city,
           country,
         });
-
-        console.log(newAddress);
-
-        console.log(profile.address);
   
         await newAddress.save();
   
-        profile.address.push(newAddress);
+        profile.address = newAddress;
+        
       }
   
       return await profile.save();
