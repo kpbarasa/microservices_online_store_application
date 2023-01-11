@@ -1,0 +1,9 @@
+./session
+./node_modules
+./checkout/.env
+./customer/node_modules
+./customer/.env
+./shopping/node_modules
+./shopping/.env
+./product/node_modules
+./product/.env

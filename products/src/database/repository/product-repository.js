@@ -34,7 +34,7 @@ class ProductRepository {
     }
   
     async FindById(id) {
-      return await ProductModel.findById(id);
+      return await ProductModel.findById(id)
     }
   
     async FindByCategory(category) {

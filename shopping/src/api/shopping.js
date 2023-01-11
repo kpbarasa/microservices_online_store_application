@@ -5,15 +5,12 @@
 
 const { CUSTOMER_BINDIG_KEY } = require("../config");
 const ShoppingService = require("../services/shopping-service");
-const ProductService = require('../../../products/src/services/product-service');
-const { SubscribeMessage } = require("../utils");
 const UserAuth = require('./middlewares/auth');
+const mpesaAccessToken = require('./middlewares/mpesa-access-token');
 
 module.exports = (app, channel) => {
 
     const service = new ShoppingService();
-
-    // SubscribeMessage(channel, service);
 
     // Cart
     app.post("/cart", UserAuth, async (req, res, next) => {
@@ -82,4 +79,25 @@ module.exports = (app, channel) => {
         const data = await service.GetOrders(_id);
         return res.status(200).json(data);
     });
+
+
+    // Check out 
+    app.get("/checkout/stripe/:order_id", UserAuth, async (req, res, next) => {
+        const { _id } = req.user;
+        const order_id  = req.params.order_id;
+        const token =""
+        const data = await service.CheckOutOrder(_id, order_id, "STRIPE", token);
+        return res.status(200).json(data);
+    });
+
+    app.get("/checkout/m-pesa/:order_id", UserAuth, mpesaAccessToken, async (req, res, next) => {
+        console.log(req.access_token);
+        const { _id } = req.user;
+        const order_id  = req.params.order_id;
+        const token = req.access_token
+        const data = await service.CheckOutOrder(_id, order_id, "MPESA", token);
+        return res.status(200).json(data);
+    });
+    
+    
 }
