@@ -1,2 +1,4 @@
 {"level":"error","message":"Tue Dec 13 2022 12:41:25 GMT+0300 (East Africa Time)-{}","private":true}
 {"level":"error","message":"Tue Dec 13 2022 12:41:55 GMT+0300 (East Africa Time)-{}","private":true}
+{"level":"error","message":"Mon Jan 09 2023 09:46:41 GMT+0300 (East Africa Time)-{\"expose\":true,\"statusCode\":400,\"status\":400,\"body\":\"{\\r\\n    6366499b720605168b68868b\\r\\n}\",\"type\":\"entity.parse.failed\"}","private":true}
+{"level":"error","message":"Mon Jan 09 2023 09:46:46 GMT+0300 (East Africa Time)-{\"expose\":true,\"statusCode\":400,\"status\":400,\"body\":\"{\\r\\n    \\\"6366499b720605168b68868b\\\"\\r\\n}\",\"type\":\"entity.parse.failed\"}","private":true}

@@ -1,5 +1,6 @@
 const { ShoppingRepository } = require("../database");
-const { FormateData, RPCRequest } = require("../utils");
+const { FormatReciept, RPCRequest } = require("../utils");
+const axios = require('axios');
 
 // All Business logic will be here
 class ShoppingService {
@@ -109,14 +110,76 @@ class ShoppingService {
     return this.repository.Orders(customerId);
   }
 
-  async ManageCart(customerId, item, qty, isRemove) {
-    const cartResult = await this.repository.AddCartItem(
-      customerId,
-      item,
-      qty,
-      isRemove
-    );
-    return FormateData(cartResult);
+  async CheckOutOrder(customerId, orderId, paymentType, token) {
+
+    // User info
+    const phoneNo = '0703553986';
+
+    // Order Info
+    const order = await this.repository.Orders("", orderId)
+    const oredr_data = JSON.stringify(order);
+
+    if (paymentType === "STRIPE") {
+
+      // Grab Checkout info from Checkout Service through RPC
+      const checkOutResponse = await RPCRequest("CHECKOUT_RPC", {
+        type: "CHECKOUT_STRIPE_RPC",
+        data: { customerId, oredr_data },
+      });
+
+      return checkOutResponse;
+
+      // if (checkOutResponse) {
+
+      //   const data = await this.repository.CheckOut(
+      //     customerId,
+      //     orderId,
+      //     paymentType
+      //   );
+
+      //   return FormateData(data);
+
+      // }
+
+    }
+
+    else if (paymentType === "MPESA") {
+
+      // Grab Checkout info from Checkout Service through RPC
+      const checkOutResponse = await RPCRequest("CHECKOUT_RPC", {
+        type: "CHECKOUT_MPESA_RPC",
+        data: { customerId, oredr_data, phoneNo, token },
+      });
+
+      console.log(checkOutResponse);
+
+      // if (checkOutResponse) {
+
+      //   // M-PESA REPOSITORY CALL BACK
+      //   const data = await axios.get('http://localhost:8004/mpesa/callback');
+      //   return data
+
+      // }
+
+      return checkOutResponse;
+
+    }
+
+    else if (paymentType === "PAYPAL") {
+
+      // Grab Checkout info from Checkout Service through RPC
+      const checkOutResponse = await RPCRequest("CHECKOUT_RPC", {
+        type: "CHECKOUT_PAYPAL_RPC",
+        data: { oredr_data },
+      });
+
+      console.log(checkOutResponse);
+      return checkOutResponse;
+
+
+    }
+
+
   }
 
   async SubscribeEvents(payload) {

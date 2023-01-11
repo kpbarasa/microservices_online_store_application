@@ -39,7 +39,44 @@ module.exports.ValidatePassword = async (
                 return false;
         });
 
-module.exports.FormateData = (data) => {
+module.exports.FormatReciept = (data) => {
+        if (data) {
+
+                const sales_data = {
+                        message: "Sale successfull",
+                        store: { storeName, address },
+                        checkout: "auto",
+                        date: "",
+                        orderId: "",
+                        user: [
+                                { id: "" },
+                                { name: "" }
+                        ],
+                        itemsNo: 00,
+                        items: [],
+                        shipping: [
+                                {
+                                        area: "",
+                                        location: "",
+                                        cost: ""
+                                }
+                        ],
+                        coupon: {},
+                        tax: [
+                                { VAT: "" },
+                                { CTL: "" },
+                                { BEV_SC: "" }
+                        ],
+                        total: {}
+
+                };
+                return { data };
+        } else {
+                throw new Error("Data Not found!");
+        }
+};
+
+exports.FormateData = (data) => {
         if (data) {
                 return { data };
         } else {

@@ -140,7 +140,7 @@ class ShoppingRepository {
       });
 
     }
-    
+
   }
 
   async GetWishlistByCustomerId(customerId) {
@@ -196,6 +196,121 @@ class ShoppingRepository {
     }
 
     return {};
+  }
+
+  async CheckOut(customerId, order_id, paymentInfo) {
+
+    var data;
+
+    const order = await OrderModel.findById({ _id: order_id });
+
+    const { shipingInfoArea, shipingInfoLocation, shipingInfoCost, amount } = order;
+    const order_items = order.items
+    const items = [];
+
+    order_items.map((item) => {
+      // amount += parseInt(item.product.price) * parseInt(item.unit);
+      items.push({ name: item.name, price:  item.price, quantity: item.quantity })
+    });
+
+    //Get customer payment info
+    const { paymentType, userPaymentData } = paymentInfo;
+
+    const payload = (order_ifo, paymet_type, paymet_status, shipping_info, shipping_status) => {
+
+      return {
+        order_ifo,
+        paymet_type,
+        paymet_status,
+        shipping_info,
+        shipping_status
+      }
+    };
+
+    //STRIPE PAYMENT 
+    if (paymentType === "STRIPE") {
+
+      const stripe = stripeCheckout(customerId, shipingInfoArea, shipingInfoLocation, shipingInfoCost, amount)
+
+      if (stripe) {
+
+        order.status = "PAYED";
+        order.shipping_status = "PENDING";
+
+        data = payload(
+          order,
+          "STRIPE",
+          order.status,
+          shipping_info,
+          order.shipping_status
+        )
+
+      }
+
+    }
+
+    //PAYPAL PAYMENT 
+    else if (paymentType === "PAYPAL") {
+
+      const { items, amount } = userPaymentData;
+
+      const paypal = paypalCheckout(items, amount)
+
+      if (paypal) {
+
+        order.status = "PAYED";
+        order.shipping_status = "PENDING";
+
+        data = payload(
+          order,
+          "PAYPAL",
+          order.status,
+          shipping_info,
+          order.shipping_status
+        )
+
+      }
+
+    }
+
+    //MPESA PAYMENT 
+    else if (paymentType === "MPESA") {
+
+      const { phone_no, amount } = userPaymentData;
+
+      const m_pesa = m_pesaCheckout(phone_no, amount)
+
+      if (m_pesa) {
+
+        order.status = "PAYED";
+        order.shipping_status = "PENDING";
+
+        data = payload(
+          order,
+          "MPESA",
+          order.status,
+          shipping_info,
+          order.shipping_status
+        )
+
+      }
+
+    }
+
+    console.log(data);
+
+    await order.save(); //update order
+
+    return data;
+
+  }
+
+  async CancleOrder(customerId, order_id) {
+
+    const order = await OrderModel.findById({ _id: order_id });
+
+    console.log(order);
+
   }
 
   async deleteProfileData(customerId) {
