@@ -16,6 +16,14 @@ class BaseError extends Error {
   }
 }
 
+// 404 Not Found
+class MongoDBError extends BaseError {
+  constructor(description = "Mongo DB Error ============") {
+    super("unable to connect to db", STATUS_CODES.NOT_FOUND, description);
+  }
+  
+}
+
 // 500 Internal Error
 class APIError extends BaseError {
   constructor(description = "api error") {
@@ -50,6 +58,7 @@ class NotFoundError extends BaseError {
 
 module.exports = {
   APIError,
+  MongoDBError,
   ValidationError,
   AuthorizeError,
   NotFoundError,

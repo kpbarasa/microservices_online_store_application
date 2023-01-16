@@ -1,6 +1,6 @@
 const { CustomerRepository } = require("../database");
 const { FormateData, GeneratePassword, GenerateSalt, GenerateSignature, ValidatePassword } = require('../utils');
-const { NotFoundError } = require('../utils/errors/app-errors')
+const { NotFoundError, ValidationError } = require('../utils/errors/app-errors')
 
 
 // All Business logic will be here
@@ -38,7 +38,7 @@ class CustomerService {
 
         const existingCustomer = await this.repository.FindCustomer({ email });
 
-        if (existingCustomer) throw new NotFoundError("User already exists with the Email Address"+{ email }+"!");
+        if (existingCustomer) throw new NotFoundError("User already exists with the Email Address" + { email } + "!");
 
 
         // create salt
@@ -58,8 +58,8 @@ class CustomerService {
     async AddNewAddress(_id, userInputs) {
 
         const { street, postalCode, city, country } = userInputs;
-        
-        return await this.repository.CreateAddress({ _id, street, postalCode, city, country }) 
+
+        return await this.repository.CreateAddress({ _id, street, postalCode, city, country })
 
     }
 
@@ -75,12 +75,12 @@ class CustomerService {
     }
 
     async DeleteProfile(userId) {
-      const data = await this.repository.DeleteCustomerById(userId);
-      const payload = {
-        event: "DELETE_PROFILE",
-        data: { userId },
-      };
-      return { data, payload };
+        const data = await this.repository.DeleteCustomerById(userId);
+        const payload = {
+            event: "DELETE_PROFILE",
+            data: { userId },
+        };
+        return { data, payload };
     }
 
     async SubscribeEvents(payload) {
