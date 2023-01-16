@@ -21,6 +21,7 @@ jobs:
           echo APP_SECRET=${{ secrets.QA_APP_SECRET }} >> .env
           echo MONGODB_URI=${{ secrets.QA_DB_URL }} >> .env
           echo MSG_QUEUE_URL=${{ secrets.QA_MSG_QUEUE_URL }} >> .env
+          echo SENTRY_DNS_KEY=${{secrets.SENTRY_DNS_KEY}} >> .env
           echo EXCHANGE_NAME=ONLINE_STORE >> .env
           echo PORT=8001 >> .env
           cat .env
@@ -31,6 +32,7 @@ jobs:
           echo APP_SECRET=${{ secrets.QA_APP_SECRET }} >> .env
           echo MONGODB_URI=${{ secrets.QA_DB_URL }} >> .env
           echo MSG_QUEUE_URL=${{ secrets.QA_MSG_QUEUE_URL }} >> .env
+          echo SENTRY_DNS_KEY=${{secrets.SENTRY_DNS_KEY}} >> .env
           echo EXCHANGE_NAME=ONLINE_STORE >> .env
           echo PORT=8002 >> .env
           cat .env
@@ -42,6 +44,7 @@ jobs:
           echo APP_SECRET=${{ secrets.QA_APP_SECRET }} >> .env
           echo MONGODB_URI=${{ secrets.QA_DB_URL }} >> .env
           echo MSG_QUEUE_URL=${{ secrets.QA_MSG_QUEUE_URL }} >> .env
+          echo SENTRY_DNS_KEY=${{secrets.SENTRY_DNS_KEY}} >> .env
           echo EXCHANGE_NAME=ONLINE_STORE >> .env
           echo PORT=8003 >> .env
           cat .env
@@ -54,73 +57,7 @@ jobs:
           echo APP_SECRET=${{ secrets.QA_APP_SECRET }} >> .env
           echo MONGODB_URI=${{ secrets.QA_DB_URL }} >> .env
           echo MSG_QUEUE_URL=${{ secrets.QA_MSG_QUEUE_URL }} >> .env
-          echo EXCHANGE_NAME=ONLINE_STORE >> .env
-          echo PORT=8003 >> .env
-          cat .env
-          
-      - name: Generate deployment package
-        run: |
-          zip -r deploy.zip . -x '*.git'
-      
-      - name: Deploy on Elastic beanstalk QA Env
-        uses: einaregilsson/beanstalk-deploy@v20
-        with:
-          aws_access_key: ${{ secrets.name: Deploy on QA
-
-on:
-  push:
-    branches: [ "main" ]
-  workflow_dispatch:
-
-jobs:
-  deploy_on_qa:
-
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout Source Code
-        uses: actions/checkout@v2
-      
-      - name: Create customer Env file
-        working-directory: ./customer
-        run: |
-          touch .env
-          echo APP_SECRET=${{ secrets.QA_APP_SECRET }} >> .env
-          echo MONGODB_URI=${{ secrets.QA_DB_URL }} >> .env
-          echo MSG_QUEUE_URL=${{ secrets.QA_MSG_QUEUE_URL }} >> .env
-          echo EXCHANGE_NAME=ONLINE_STORE >> .env
-          echo PORT=8001 >> .env
-          cat .env
-      - name: Create Products Env file
-        working-directory: ./products
-        run: |
-          touch .env
-          echo APP_SECRET=${{ secrets.QA_APP_SECRET }} >> .env
-          echo MONGODB_URI=${{ secrets.QA_DB_URL }} >> .env
-          echo MSG_QUEUE_URL=${{ secrets.QA_MSG_QUEUE_URL }} >> .env
-          echo EXCHANGE_NAME=ONLINE_STORE >> .env
-          echo PORT=8002 >> .env
-          cat .env
-          
-      - name: Create shopping Env file
-        working-directory: ./shopping
-        run: |
-          touch .env
-          echo APP_SECRET=${{ secrets.QA_APP_SECRET }} >> .env
-          echo MONGODB_URI=${{ secrets.QA_DB_URL }} >> .env
-          echo MSG_QUEUE_URL=${{ secrets.QA_MSG_QUEUE_URL }} >> .env
-          echo EXCHANGE_NAME=ONLINE_STORE >> .env
-          echo PORT=8003 >> .env
-          cat .env
-          
-          
-      - name: Create checkout Env file
-        working-directory: ./shopping
-        run: |
-          touch .env
-          echo APP_SECRET=${{ secrets.QA_APP_SECRET }} >> .env
-          echo MONGODB_URI=${{ secrets.QA_DB_URL }} >> .env
-          echo MSG_QUEUE_URL=${{ secrets.QA_MSG_QUEUE_URL }} >> .env
+          echo SENTRY_DNS_KEY=${{secrets.SENTRY_DNS_KEY}} >> .env
           echo EXCHANGE_NAME=ONLINE_STORE >> .env
           echo PORT=8003 >> .env
           cat .env
