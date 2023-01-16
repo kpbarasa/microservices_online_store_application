@@ -19,6 +19,7 @@ jobs:
           echo APP_SECRET=${{ secrets.PROD_APP_SECRET }} >> .env
           echo MONGODB_URI=${{ secrets.PROD_DB_URL }} >> .env
           echo MSG_QUEUE_URL=${{ secrets.PROD_MSG_QUEUE_URL }} >> .env
+          echo SENTRY_DNS_KEY=${{secrets.SENTRY_DNS_KEY}} >> .env
           echo EXCHANGE_NAME=ONLINE_STORE >> .env
           echo PORT=8001 >> .env
           cat .env
@@ -29,6 +30,7 @@ jobs:
           echo APP_SECRET=${{ secrets.PROD_APP_SECRET }} >> .env
           echo MONGODB_URI=${{ secrets.PROD_DB_URL }} >> .env
           echo MSG_QUEUE_URL=${{ secrets.PROD_MSG_QUEUE_URL }} >> .env
+          echo SENTRY_DNS_KEY=${{secrets.SENTRY_DNS_KEY}} >> .env
           echo EXCHANGE_NAME=ONLINE_STORE >> .env
           echo PORT=8002 >> .env
           cat .env
@@ -40,6 +42,7 @@ jobs:
           echo APP_SECRET=${{ secrets.PROD_APP_SECRET }} >> .env
           echo MONGODB_URI=${{ secrets.PROD_DB_URL }} >> .env
           echo MSG_QUEUE_URL=${{ secrets.PROD_MSG_QUEUE_URL }} >> .env
+          echo SENTRY_DNS_KEY=${{secrets.SENTRY_DNS_KEY}} >> .env
           echo EXCHANGE_NAME=ONLINE_STORE >> .env
           echo PORT=8003 >> .env
           cat .env
@@ -51,6 +54,7 @@ jobs:
           echo APP_SECRET=${{ secrets.PROD_APP_SECRET }} >> .env
           echo MONGODB_URI=${{ secrets.PROD_DB_URL }} >> .env
           echo MSG_QUEUE_URL=${{ secrets.PROD_MSG_QUEUE_URL }} >> .env
+          echo SENTRY_DNS_KEY=${{secrets.SENTRY_DNS_KEY}} >> .env
           echo EXCHANGE_NAME=ONLINE_STORE >> .env
           echo PORT=8003 >> .env
           cat .env
