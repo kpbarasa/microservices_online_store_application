@@ -8,6 +8,9 @@ class ShoppingService {
         this.repository = new ShoppingRepository();
     }
 
+    // Shopping cart 
+    // _____________________________________________________________________________  
+    // =============================================================================
     async GetCart({ _id }) {
 
         const cartItems = await this.repository.Cart(_id);
@@ -16,6 +19,40 @@ class ShoppingService {
         return FormateData(cartItems);
     }
 
+    async ManageCart(customerId, item, qty, isRemove) {
+        console.log(item);
+
+        const cartResult = await this.repository.AddCartItem(customerId, item, qty, isRemove);
+        return FormateData(cartResult);
+    }
+
+    // Wishlist
+    // _____________________________________________________________________________  
+    // =============================================================================
+    async GetWishList(customerId) {
+
+        try {
+            const wishListItems = await this.repository.Wishlist(customerId);
+            return FormateData(wishListItems);
+        } catch (err) {
+            throw new APIError('Data Not found', err)
+        }
+    }
+
+    async AddToWishlist(customerId, product) {
+        try {
+
+            const wishlistResult = await this.repository.AddWishlistItem(customerId, product);
+            return FormateData(wishlistResult);
+
+        } catch (err) {
+            throw new APIError('Data Not found', err)
+        }
+    }
+
+    // Orders
+    // _____________________________________________________________________________  
+    // =============================================================================
     async PlaceOrder(userInput) {
 
         const { _id, txnNumber } = userInput;
@@ -36,13 +73,34 @@ class ShoppingService {
         return FormateData(orders)
     }
 
-    async ManageCart(customerId, item, qty, isRemove) {
-        console.log(item);
+    async GetShopingDetails(id) {
 
-        const cartResult = await this.repository.AddCartItem(customerId, item, qty, isRemove);
-        return FormateData(cartResult);
+        try {
+            const existingCustomer = await this.repository.FindCustomerById({ id });
+
+            if (existingCustomer) {
+                return FormateData(existingCustomer);
+            }
+            return FormateData({ msg: 'Error' });
+
+        } catch (err) {
+            throw new APIError('Data Not found', err)
+        }
     }
 
+    async ManageOrder(customerId, order) {
+        try {
+            const orderResult = await this.repository.AddOrderToProfile(customerId, order);
+            return FormateData(orderResult);
+        } catch (err) {
+            throw new APIError('Data Not found', err)
+        }
+    }
+
+
+    // SUbscribed Events
+    // _____________________________________________________________________________  
+    // =============================================================================
     async SubscribeEvents(payload) {
 
         payload = JSON.parse(payload);
