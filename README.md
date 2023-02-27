@@ -4,7 +4,7 @@ Online Shopoping Store Nodejs Microservices RPC CI CD
 * Deployment: Docker, Amazon Elastic  BeanstalkMEssaging Rabbit MQ
 * Error Handdling: Sentry 
 
-#### Servicies
+### Servicies:
  #### 1. CUSTOMER
 *   -Register user
 *   -Logg in 
