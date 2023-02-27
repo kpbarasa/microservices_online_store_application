@@ -1,4 +1,4 @@
-### online_shopping_store
+### Online shopping store
 Online Shopoping Store Nodejs Microservices RPC CI CD
 * Storage: Amazon S3 Bucket
 * Deployment: Docker, Amazon Elastic  BeanstalkMEssaging Rabbit MQ
