@@ -5,7 +5,7 @@ Online Shopoping Store Nodejs Microservices RPC CI CD
 * Error Handdling: Sentry 
 
 #### Servicies
- 1. CUSTOMER
+ #### 1. CUSTOMER
 *   -Register user
 *   -Logg in 
 *   -User Authentication
@@ -15,7 +15,7 @@ Online Shopoping Store Nodejs Microservices RPC CI CD
 *   -Get Wishlist
 *   -Get Shopping Cart
 
- 2. PRODUCTS
+ #### 2. PRODUCTS
 *   -Create product
 *   -Update product
 *   -Update product
@@ -23,7 +23,7 @@ Online Shopoping Store Nodejs Microservices RPC CI CD
 *   -Get products by id
 *   -Get products by Category
 
- 3. SHOPPING
+ #### 3. SHOPPING
 *   -User Authentication
 *   -View profile
 *   -View Orders
