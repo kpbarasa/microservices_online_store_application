@@ -52,15 +52,15 @@ Online Shopoping Store Nodejs Microservices RPC CI CD
 
 
 #### **Git Ignore:**
-###### 1.  /server/node_modules
-###### 2.  .env./checkout/node_modules
-###### 3.  ./checkout/.env
-###### 4.  ./customer/node_modules
-###### 5.  ./customer/.env
-###### 6.  ./products/node_modules
-###### 7.  ./products/.env
-###### 8.  ./shopping/node_modules
-###### 9.  ./shopping/.env
+*   /server/node_modules
+*   .env./checkout/node_modules
+*   ./checkout/.env
+*   ./customer/node_modules
+*   ./customer/.env
+*   ./products/node_modules
+*   ./products/.env
+*   ./shopping/node_modules
+*   ./shopping/.env
 
 #### .env(Environment file)
 ```
