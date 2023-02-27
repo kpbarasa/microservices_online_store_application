@@ -4,7 +4,7 @@ Online Shopoping Store Nodejs Microservices RPC CI CD
 * Deployment: Docker, Amazon Elastic  BeanstalkMEssaging Rabbit MQ
 * Error Handdling: Sentry 
 
-##### Servicies
+#### Servicies
  1. CUSTOMER
 *   -Register user
 *   -Logg in 
@@ -33,10 +33,10 @@ Online Shopoping Store Nodejs Microservices RPC CI CD
 
  4. CHECKOUT
 
-##### Packages
+#### Packages
 2. server (Node JS Server)
 ---
-##### **Dependencies:**
+#### **Dependencies:**
    * express
    * nodemon (dev dependency)
    * amqplib
@@ -51,7 +51,7 @@ Online Shopoping Store Nodejs Microservices RPC CI CD
    * winston
 
 
-##### **Git Ignore:**
+#### **Git Ignore:**
 ###### 1.  /server/node_modules
 ###### 2.  .env./checkout/node_modules
 ###### 3.  ./checkout/.env
@@ -61,9 +61,10 @@ Online Shopoping Store Nodejs Microservices RPC CI CD
 ###### 7.  ./products/.env
 ###### 8.  ./shopping/node_modules
 ###### 9.  ./shopping/.env
+
+#### .env(Environment file)
 ```
 
-# Node env
 NODE_ENV="DEVELOPMENT"
 APP_SECRET =''
 
