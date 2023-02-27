@@ -71,7 +71,7 @@ APP_SECRET =''
 MONGODB_URI=''
 
 # Port
-PORT=8004
+PORT=""
 
 # Message broker 
 ### Virtualhost
