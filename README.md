@@ -32,11 +32,8 @@ Online Shopoping Store Nodejs Microservices RPC CI CD
 *   -Cart
 
  4. CHECKOUT
-
-#### Packages
-2. server (Node JS Server)
 ---
-#### **Dependencies:**
+### **Dependencies:**
    * express
    * nodemon (dev dependency)
    * amqplib
@@ -51,7 +48,7 @@ Online Shopoping Store Nodejs Microservices RPC CI CD
    * winston
 
 
-#### **Git Ignore:**
+### **Git Ignore:**
 *   /server/node_modules
 *   .env./checkout/node_modules
 *   ./checkout/.env
@@ -62,7 +59,7 @@ Online Shopoping Store Nodejs Microservices RPC CI CD
 *   ./shopping/node_modules
 *   ./shopping/.env
 
-#### .env(Environment file)
+### .env(Environment file)
 ```
 
 NODE_ENV="DEVELOPMENT"
