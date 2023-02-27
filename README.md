@@ -1,35 +1,35 @@
 ### online_shopping_store
 Online Shopoping Store Nodejs Microservices RPC CI CD
-Storage: Amazon S3 Bucket
-Deployment: Docker, Amazon Elastic  BeanstalkMEssaging Rabbit MQ
-Error Handdling: Sentry 
+* Storage: Amazon S3 Bucket
+* Deployment: Docker, Amazon Elastic  BeanstalkMEssaging Rabbit MQ
+* Error Handdling: Sentry 
 
 ##### Servicies
  1. CUSTOMER
-    -Register user
-    -Logg in 
-    -User Authentication
-    -View profile
-    -View Orders
-    -Shoping-Details
-    -Get Wishlist
-    -Get Shopping Cart
+*   -Register user
+*   -Logg in 
+*   -User Authentication
+*   -View profile
+*   -View Orders
+*   -Shoping-Details
+*   -Get Wishlist
+*   -Get Shopping Cart
 
  2. PRODUCTS
-    -Create product
-    -Update product
-    -Update product
-    -Get products
-    -Get products by id
-    -Get products by Category
+*   -Create product
+*   -Update product
+*   -Update product
+*   -Get products
+*   -Get products by id
+*   -Get products by Category
 
  3. SHOPPING
-    -User Authentication
-    -View profile
-    -View Orders
-    -Shoping-Details
-    -Wishlist
-    -Cart
+*   -User Authentication
+*   -View profile
+*   -View Orders
+*   -Shoping-Details
+*   -Wishlist
+*   -Cart
 
  4. CHECKOUT
 
@@ -71,7 +71,7 @@ APP_SECRET =''
 MONGODB_URI=''
 
 # Port
-PORT=""
+PORT=''
 
 # Message broker 
 ### Virtualhost
